@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+
+    <link rel="stylesheet" type="text/css" href="./login2.css">
+    <link rel="icon" href="../favicon.png">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Page</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            padding: 50px;
+            background: linear-gradient(45deg, #ff9a9e, #fad0c4, #fad0c4, #a1c4fd);
+            color: #333;
+
+        }
+
+        input {
+            padding: 10px;
+            margin: 10px;
+        }
+
+        button {
+            padding: 10px;
+            margin: 10px;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="form">
+        <form id="h">
+            <h1>Login Page</h1><br>
+        </form>
+
+
+        <label for="username" id="label">Username:</label>
+        <input type="text" id="username" placeholder="Enter your username">
+        <button onclick="login()">Login</button>
+    </div>
+    <script>
+        function login() {
+            // Get the entered username
+            const username = document.getElementById('username').value;
+
+            // Check if the username is not empty
+            if (username.trim() !== '') {
+                // Set up user data based on the entered username
+                let user = {};
+                if (username.toLowerCase() === 'admin') {
+                    user = {
+                        username: 'admin',
+                        role: 'admin'
+                    };
+                } else {
+                    user = {
+                        username: username,
+                        role: 'user'
+                    };
+                }
+
+                // Store user data in sessionStorage
+                sessionStorage.setItem('userData', JSON.stringify(user));
+
+                // Redirect based on user role
+                if (user.role === 'admin') {
+                    window.location.href = 'admin-home.html'; // Redirect to admin page
+                } else {
+                    window.location.href = 'home.html'; // Redirect to normal user page
+                }
+            } else {
+                alert('Please enter a username.');
+            }
+        }
+
+    </script>
+</body>
+
+</html>

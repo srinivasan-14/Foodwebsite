@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" type="text/css" href="./style.css">
+  <link rel="icon" href="../my_new_website./images/favicon.png">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+  <title>DGVC CANTEEN | Welcome</title>
+
+  <style>
+    .card {
+      width: 25rem;
+      margin: 20px;
+    }
+
+    .counter {
+      font-size: 2.5em;
+      margin-top: 10px;
+    }
+
+    button {
+      font-size: 2.2em;
+      margin-top: 10px;
+      padding: 5px 10px;
+      cursor: pointer;
+    }
+  </style>
+  <script>
+    // Initialize counters for each food item
+    let counters = {
+      "Paneer Butter Masala": 0,
+      "Mini Samosa": 0,
+      "Mojito": 0,
+      "Ice Scoops": 0,
+      "Burger and Fries": 0,
+      "Noodles": 0,
+      "Cappuccino": 0,
+      "Brownie": 0,
+      "Ice Cream": 0,
+      "Brown Velvet Cake": 0,
+      "French Fries": 0,
+      "Pizza": 0,
+
+      // Add more food items as needed
+    };
+    const foodPrices = {
+      "Paneer Butter Masala": 20,
+      "Mini Samosa": 20,
+      "Mojito": 20,
+      "Ice Scoops": 20,
+      "Burger and Fries": 20,
+      "Noodles": 20,
+      "Cappuccino": 20,
+      "Brownie": 20,
+      "Ice Cream": 20,
+      "Red Velvet Cake": 20,
+      "Rice with Gobi": 20,
+      "Pan Cake": 20
+      // Add more items as needed
+    };
+
+    // Function to increase the count for a specific food item
+    // Function to increase the count for a specific food item
+    function increaseCount(item) {
+      if (counters[item] < 2) { // Check if the quantity is less than 2
+        counters[item]++;
+        updateCounter(item);
+      } else {
+        alert(`You can't order more than 2 ${item}(s).`);
+      }
+    }
+
+
+    // Function to decrease the count for a specific food item
+    function decreaseCount(item) {
+      if (counters[item] > 0) {
+        counters[item]--;
+        updateCounter(item);
+      }
+    }
+
+    // Function to update the counter display for a specific food item
+    function updateCounter(item) {
+      document.getElementById(`${item}-counter`).innerText = counters[item];
+    } function updateTotal() {
+      let total = 0;
+      for (let item in counters) {
+        total += counters[item] * foodPrices[item];
+      }
+      // Assuming you have an element with id "total-price" to display the total
+      document.getElementById("total-price").innerText = `Total: ${total} Rs`;
+    }
+
+    // Function to handle the buy button click
+    function buy() {
+      // Prepare data for storing in sessionStorage
+      let orderData = {
+        username: sessionStorage.getItem('username'),
+        items: []
+      };
+
+      // Collect data for each selected food item
+      for (let item in counters) {
+        if (counters[item] > 0) {
+          orderData.items.push({
+            name: item,
+            quantity: counters[item]
+          });
+        }
+      }
+
+      // Convert orderData to JSON
+      let jsonData = JSON.stringify(orderData);
+
+      // Store data in sessionStorage
+      console.log('Order Data to be stored:', jsonData);
+      sessionStorage.setItem('orderData', jsonData);
+      // Storing order data as an array
+      let orderDataArray = [orderData];
+
+
+
+      // Redirect to the order page (replace 'about.html' with your actual order page)
+      window.location.href = 'about.html';
+    }
+  </script>
+
+
+</head>
+
+<body>
+
+  <header>
+    <div class="container">
+      <div id="branding">
+        <h1><span class="highlight">DGVC</span> FOODS</h1>
+      </div>
+      <nav>
+        <ul>
+          <li class="current"><a href="home.html">HOME</a></li>
+          <li><a href="about.html">ORDER</a></li>
+
+          <!--<li><a href="services.html">SERVICES</a></li>-->
+          <!-- In your navigation menu or wherever you want -->
+          <a href="order-summary.html">Order Summary</a>
+
+
+
+        </ul>
+
+      </nav>
+  </header>
+
+  <!--<section id="showcase">
+	<div class="container">
+<h1>DGVC STUDENTS CANTEEN</h1>
+</div></section>-->
+
+  <section id="newsletter">
+    <div class="container">
+      <h1>Delicious Foods are Available!</h1>
+      <div>
+        <button type="button" id="btn" onclick="buy()">ORDER</button>
+        <a>Click here to Order Now ! --></a>
+
+      </div>
+  </section>
+
+  <section id="hcards">
+    <div class="card" style="width: 27rem;">
+      <div class="V">
+        <a href="E:/DGVC FOODS PROJECT/buttermasala.jpg" class="V"><img src="E:/DGVC FOODS PROJECT/buttermasala.jpg"
+            class="card-img-top" alt="..."></a>
+      </div>
+      <div class="card-body">
+        <h5 class="card-title">Paneer Butter Masala</h5>
+        <div class="counter" id="Paneer Butter Masala-counter">0</div>
+        <button onclick="increaseCount('Paneer Butter Masala')">+</button>
+        <button onclick="decreaseCount('Paneer Butter Masala')">-</button>
+
+      </div>
+    </div>
+    <div class="card" style="width: 27rem;">
+      <div class="V">
+        <a href="E:/DGVC FOODS PROJECT/SAMOSA2.jpg"><img src="E:/DGVC FOODS PROJECT/SAMOSA2.jpg" class="card-img-top"
+            alt="..."></a>
+      </div>
+      <div class="card-body">
+        <h5 class="card-title">Mini Samosa</h5>
+        <div class="counter" id="Mini Samosa-counter">0</div>
+        <button onclick="increaseCount('Mini Samosa')">+</button>
+        <button onclick="decreaseCount('Mini Samosa')">-</button>
+
+
+      </div>
+    </div>
+
+    <div class="card" style="width: 27rem;">
+      <div class="V">
+        <a href="E:/DGVC FOODS PROJECT/MOJITO.jpg"><img src="E:/DGVC FOODS PROJECT/MOJITO.jpg" class="card-img-top"
+            alt="..."></a>
+      </div>
+      <div class="card-body">
+        <h5 class="card-title">Mojito</h5>
+        <div class="counter" id="Mojito-counter">0</div>
+        <button onclick="increaseCount('Mojito')">+</button>
+        <button onclick="decreaseCount('Mojito')">-</button>
+
+      </div>
+    </div>
+  </section>
+  </section>
+  <section id="hcards">
+    <div class="card" style="width: 27rem;">
+      <div class="V">
+        <a href="E:/DGVC FOODS PROJECT/ICE.jpg"><img src="E:/DGVC FOODS PROJECT/ICE.jpg" class="card-img-top"
+            alt="..."></a>
+      </div>
+      <div class="card-body">
+        <h5 class="card-title">Ice Scoops</h5>
+        <div class="counter" id="Ice Scoops-counter">0</div>
+        <button onclick="increaseCount('Ice Scoops')">+</button>
+        <button onclick="decreaseCount('Ice Scoops')">-</button>
+
+      </div>
+    </div>
+    <div class="card" style="width: 27rem;">
+      <div class="V">
+        <a href="E:/DGVC FOODS PROJECT/FRIES.jpg"><img src="E:/DGVC FOODS PROJECT/FRIES.jpg" class="card-img-top"
+            alt="..."></a>
+      </div>
+      <div class="card-body">
+        <h5 class="card-title">Burger and Fries</h5>
+        <div class="counter" id="Burger and Fries-counter">0</div>
+        <button onclick="increaseCount('Burger and Fries')">+</button>
+        <button onclick="decreaseCount('Burger and Fries')">-</button>
+
+
+      </div>
+    </div>
+    <div class="card" style="width: 27rem;">
+      <div class="V">
+        <a href="E:/DGVC FOODS PROJECT/magie.jpg"><img src="E:/DGVC FOODS PROJECT/magie.jpg" class="card-img-top"
+            alt="..."></a>
+      </div>
+      <div class="card-body">
+        <h5 class="card-title">Noodles</h5>
+        <div class="counter" id="Noodles-counter">0</div>
+        <button onclick="increaseCount('Noodles')">+</button>
+        <button onclick="decreaseCount('Noodles')">-</button>
+
+      </div>
+    </div>
+  </section>
+  <section id="hcards">
+    <div class="card" style="width: 27rem;">
+      <div class="V">
+        <a href="E:/DGVC FOODS PROJECT/cappuccino.jpg"><img src="E:/DGVC FOODS PROJECT/cappuccino.jpg"
+            class="card-img-top" alt="..."></a>
+      </div>
+      <div class="card-body">
+        <h5 class="card-title">Cappuccino</h5>
+        <div class="counter" id="Cappuccino-counter">0</div>
+        <button onclick="increaseCount('Cappuccino')">+</button>
+        <button onclick="decreaseCount('Cappuccino')">-</button>
+
+      </div>
+    </div>
+    <div class="card" style="width: 27rem;">
+      <div class="V">
+        <a href="E:/DGVC FOODS PROJECT/brownies2.jpg"><img src="E:/DGVC FOODS PROJECT/brownies2.jpg"
+            class="card-img-top" alt="..."></a>
+      </div>
+      <div class="card-body">
+        <h5 class="card-title">Brownie</h5>
+        <div class="counter" id="Brownie-counter">0</div>
+        <button onclick="increaseCount('Brownie')">+</button>
+        <button onclick="decreaseCount('Brownie')">-</button>
+
+      </div>
+    </div>
+    <div class="card" style="width: 27rem;">
+      <div class="V">
+        <a href="E:/DGVC FOODS PROJECT/ICE2.jpg"><img src="E:/DGVC FOODS PROJECT/ICE2.jpg" class="card-img-top"
+            alt="..."></a>
+      </div>
+      <div class="card-body">
+        <h5 class="card-title">Ice Cream</h5>
+        <div class="counter" id="Ice Cream-counter">0</div>
+        <button onclick="increaseCount('Ice Cream')">+</button>
+        <button onclick="decreaseCount('Ice Cream')">-</button>
+
+      </div>
+    </div>
+  </section>
+  <section id="hcards">
+    <div class="card" style="width: 27rem;">
+      <div class="V">
+        <a href="E:/DGVC FOODS PROJECT/cake2.jpg"><img src="E:/DGVC FOODS PROJECT/cake2.jpg" class="card-img-top"
+            alt="..."></a>
+      </div>
+      <div class="card-body">
+        <h5 class="card-title">Brown Velvet Cake</h5>
+        <div class="counter" id="Brown Velvet Cake-counter">0</div>
+        <button onclick="increaseCount('Brown Velvet Cake')">+</button>
+        <button onclick="decreaseCount('Brown Velvet Cake')">-</button>
+
+      </div>
+    </div>
+    <div class="card" style="width: 27rem;">
+      <div class="V">
+        <a href="E:/DGVC FOODS PROJECT/ff.jpg"><img src="E:/DGVC FOODS PROJECT/ff.jpg" class="card-img-top"
+            alt="..."></a>
+      </div>
+      <div class="card-body">
+        <h5 class="card-title">French Fries</h5>
+        <div class="counter" id="French Fries-counter">0</div>
+        <button onclick="increaseCount('French Fries')">+</button>
+        <button onclick="decreaseCount('French Fries')">-</button>
+
+      </div>
+    </div>
+    <div class="card" style="width: 27rem;">
+      <div class="V">
+        <a href="E:/DGVC FOODS PROJECT/p2.jpg"><img src="E:/DGVC FOODS PROJECT/p2.jpg" class="card-img-top"
+            alt="..."></a>
+      </div>
+      <div class="card-body">
+        <h5 class="card-title">Pizza</h5>
+        <div class="counter" id="Pizza-counter">0</div>
+        <button onclick="increaseCount('Pizza')">+</button>
+        <button onclick="decreaseCount('Pizza')">-</button>
+
+      </div>
+    </div>
+
+  </section>
+
+  <footer>
+    <p>
+      <marquee>DGVC Canteen Website, Copyright &copy; 2023</marquee>
+    </p>
+  </footer>
+
+</body>
+
+</html>

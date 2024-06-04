@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <link rel="stylesheet" type="text/css" href="./background.css">
+    <link rel="icon" href="../my_new_website./images/favicon.png">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            padding: 50px;
+            background: linear-gradient(45deg, #ff9a9e, #fad0c4, #fad0c4, #a1c4fd);
+            color: #333;
+
+        }
+
+        h3 {
+
+            text-align: center;
+        }
+
+        #content ul {
+            color: Red;
+
+        }
+
+        #content li {
+            color: Red;
+            margin: 10PX;
+            font-size: 26PX;
+        }
+    </style>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+</head>
+<link rel="stylesheet" type="text/css" href="./style.css">
+<link rel="icon" href="../my_new_website./images/favicon.png">
+<title>DGVC CANTEEN | About</title>
+<div id="content">
+    </head>
+
+    <body>
+
+        <!--<script>
+        // Retrieve data from sessionStorage
+        let jsonData = sessionStorage.getItem('orderData');
+
+        if (jsonData) {
+            // Parse JSON data
+            let orderData = JSON.parse(jsonData);
+
+            // Display order details
+            document.write(`<p>Welcome, ${orderData.username}!</p>`);
+            document.write('<p>Ordered Items:</p>');
+            document.write('<ul>');
+            for (let item of orderData.items) {
+                document.write(`<li>${item.name} - Quantity: ${item.quantity}</li>`);
+            }
+            document.write('</ul>');
+        } else {
+            document.write('<p>No order data available.</p>');
+        }
+    </script>-->
+        <!-- In your existing JavaScript code in about.html -->
+        <script>
+            document.addEventListener("DOMContentLoaded", function () {
+                // Retrieve user data from sessionStorage
+                let userData = sessionStorage.getItem('userData');
+                let jsonData = sessionStorage.getItem('orderData');
+                let contentContainer = document.getElementById('content');
+
+                if (userData && jsonData) {
+                    // Parse user data
+                    let user = JSON.parse(userData);
+                    // Parse order data and display for all users
+                    let orderData = JSON.parse(jsonData);
+
+                    contentContainer.innerHTML += `<h3>Hello, ${user.username}! Welcome to our food ordering platform.</h3>`;
+                    contentContainer.innerHTML += '<h3>The Token number for your ordered item is 2682 <br> Your Selected Items:<br></h3>';
+                    contentContainer.innerHTML += '<ul>';
+                    for (let item of orderData.items) {
+                        contentContainer.innerHTML += `<li>${item.name} - Quantity: ${item.quantity}</li>`;
+                    }
+                    contentContainer.innerHTML += '</ul>';
+                } else {
+                    contentContainer.innerHTML += '<h3>No order data available.</h3>';
+                }
+
+            })
+            /*document.addEventListener("DOMContentLoaded", function () {
+                 // Retrieve user data from sessionStorage
+                 let userData = sessionStorage.getItem('userData');
+                 let jsonData = sessionStorage.getItem('orderData');
+                 let contentContainer = document.getElementById('content');
+ 
+                 if (userData && jsonData) {
+                     // Parse user data
+                     let user = JSON.parse(userData);
+                     // Parse order data and display for all users
+                     let orderData = JSON.parse(jsonData);
+ 
+                     contentContainer.innerHTML += `<h3>New order received from ${user.username}!</h3>`;
+                     contentContainer.innerHTML += '<h3>Your Selected Items:</h3>';
+                     contentContainer.innerHTML += '<ul>';
+                     for (let item of orderData.items) {
+                         contentContainer.innerHTML += `<li>${item.name} - Quantity: ${item.quantity}</li>`;
+ 
+                         // Save order data into the database
+                         saveOrder(user.username, item.name, item.quantity);
+                     }
+                     contentContainer.innerHTML += '</ul>';
+                 } else {
+                     contentContainer.innerHTML += '<h3>No order data available.</h3>';
+                 }
+ 
+                 // Function to save order data into the database
+                 function saveOrder(username, itemName, quantity) {
+                     // Send an AJAX request to a PHP file to save the order data
+                     let xhr = new XMLHttpRequest();
+                     xhr.open('POST', 'saveorder.php', true);
+                     xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+                     xhr.onload = function () {
+                         if (xhr.status === 200) {
+                             console.log(xhr.responseText); // Log the response from the server
+                         }
+                     };
+                     xhr.send(`username=${username}&itemName=${itemName}&quantity=${quantity}`);
+                 }
+             });*/
+        </script>
+
+
+
+
+        <header>
+            <div id="content"></div>
+            <div class="container">
+                <div id="branding">
+                    <h1><span class="highlight">DGVC</span> FOODS</h1>
+                </div>
+                <nav>
+                    <ul>
+                        <li><a href="home.html">HOME</a></li>
+                        <li class="current"><a href="about.html">ORDER</a></li>
+                        <!--<li><a href="services.html">SERVICES</a></li>-->
+                    </ul>
+                </nav>
+        </header>
+
+
+
+
+
+
+    </body>
+
+</html>
